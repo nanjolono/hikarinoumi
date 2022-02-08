@@ -1,24 +1,9 @@
 pipeline {
-    agent {
-        docker { image 'nanjolono/jre8' }
-    }
-
+    agent { docker 'maven:3-alpine' }
     stages {
-        stage('Build') {
+        stage('Example Build') {
             steps {
-                echo 'Building..'
-                sh 'mvn clean package'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-                sh 'mvn test'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+                sh 'mvn -B clean verify'
             }
         }
     }
