@@ -16,8 +16,7 @@ pipeline {
         }
         stage('docker build config server') {
             steps {
-                sh 'cd ./configserver'
-                sh 'docker build -f ./Dockerfile -t configserver .'
+                sh 'docker build -f .configserver/Dockerfile -t configserver .'
             }
         }
     }
