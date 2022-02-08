@@ -21,8 +21,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                docker.build("blog-test:${env.BUILD_ID}", "./blog/")
             }
         }
     }
+    docker.build("blog-test:${env.BUILD_ID}", "./blog/")
 }
