@@ -1,4 +1,4 @@
-FROM 172.30.50.212/poc/sunyard-jdk
+FROM nanjolono/jre8
 ENV SH_PATH=/usr/local/bin
 ENV PROFILES=dev
 VOLUME /tmp
