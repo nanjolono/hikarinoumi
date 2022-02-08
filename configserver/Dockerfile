@@ -1,4 +1,4 @@
-FROM nanjolono/jre8
+FROM nanjolono/jre8:1.0
 ENV SH_PATH=/usr/local/bin
 ENV PROFILES=dev
 VOLUME /tmp
