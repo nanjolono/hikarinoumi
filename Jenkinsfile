@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'nanjolono/jre8' }
+    }
 
     stages {
         stage('Build') {
