@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                def testImage = docker.build("blog-test:${env.BUILD_ID}", "./blog/")
+                docker.build("blog-test:${env.BUILD_ID}", "./blog/")
             }
         }
     }
