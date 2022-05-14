@@ -23,4 +23,36 @@ public class PyeeInf {
     //收款方账户号
     @XmlElement(name = "PyeeAcctId")
     private String PyeeAcctId;
+
+
+    public static final class PyeeInfBuilder {
+        private PyeeInf pyeeInf;
+
+        private PyeeInfBuilder() {
+            pyeeInf = new PyeeInf();
+        }
+
+        public static PyeeInfBuilder aPyeeInf() {
+            return new PyeeInfBuilder();
+        }
+
+        public PyeeInfBuilder PyeeIssrId(String PyeeIssrId) {
+            pyeeInf.setPyeeIssrId(PyeeIssrId);
+            return this;
+        }
+
+        public PyeeInfBuilder PyeeAcctIssrId(String PyeeAcctIssrId) {
+            pyeeInf.setPyeeAcctIssrId(PyeeAcctIssrId);
+            return this;
+        }
+
+        public PyeeInfBuilder PyeeAcctId(String PyeeAcctId) {
+            pyeeInf.setPyeeAcctId(PyeeAcctId);
+            return this;
+        }
+
+        public PyeeInf build() {
+            return pyeeInf;
+        }
+    }
 }

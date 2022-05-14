@@ -1,4 +1,4 @@
-package com.nanjolono.payment.bean.request;
+package com.nanjolono.payment.bean;
 
 import lombok.Data;
 

@@ -1,6 +1,7 @@
-package com.nanjolono.payment.bean.request;
+package com.nanjolono.payment.bean;
 
 
+import com.nanjolono.payment.bean.request.Contract;
 import lombok.Data;
 
 import javax.xml.bind.annotation.*;

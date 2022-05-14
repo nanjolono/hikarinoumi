@@ -1,5 +1,6 @@
 package com.nanjolono.payment.bean.request;
 
+import com.nanjolono.payment.bean.MsgBody;
 import com.nanjolono.payment.bean.request.subbody.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -91,48 +92,104 @@ public class Contract extends MsgBody {
         BizFunc = bizFunc;
     }
 
-    public static final class AcctInfoVerifyBuilder {
+    public static final class ContractBuilder {
         private Contract contract;
 
-        private AcctInfoVerifyBuilder() {
-            contract = new Contract();
+        private ContractBuilder(String bizTp, String bizFunc) {
+            contract = new Contract(bizTp,bizFunc);
+        }
+        private ContractBuilder(){
+
+        }
+        public static ContractBuilder aContract() {
+            return new ContractBuilder();
         }
 
-        private AcctInfoVerifyBuilder(String bizTp,String BizFunc) {
-            contract = new Contract(bizTp,BizFunc);
+        public static ContractBuilder verifyInfo(String bizTp, String bizFunc){
+            return new ContractBuilder(bizTp,bizFunc);
         }
-
-        public static AcctInfoVerifyBuilder verifyInfo(String bizTp,String BizFunc) {
-            return new AcctInfoVerifyBuilder(bizTp,BizFunc);
-        }
-
-        public AcctInfoVerifyBuilder bizTp(String bizTp) {
+        public ContractBuilder bizTp(String bizTp) {
             contract.setBizTp(bizTp);
             return this;
         }
 
-        public AcctInfoVerifyBuilder BizFunc(String BizFunc) {
+        public ContractBuilder BizFunc(String BizFunc) {
             contract.setBizFunc(BizFunc);
             return this;
         }
 
-        public AcctInfoVerifyBuilder bizAssInf(BizAssInf bizAssInf) {
+        public ContractBuilder bizAssInf(BizAssInf bizAssInf) {
             contract.setBizAssInf(bizAssInf);
             return this;
         }
 
-        public AcctInfoVerifyBuilder trxInf(TrxInf trxInf) {
+        public ContractBuilder trxInf(TrxInf trxInf) {
             contract.setTrxInf(trxInf);
             return this;
         }
 
-        public AcctInfoVerifyBuilder rcverInf(RcverInf rcverInf) {
+        public ContractBuilder rcverInf(RcverInf rcverInf) {
             contract.setRcverInf(rcverInf);
             return this;
         }
 
-        public AcctInfoVerifyBuilder sderInf(SderInf sderInf) {
+        public ContractBuilder sensInf(SensInf sensInf) {
+            contract.setSensInf(sensInf);
+            return this;
+        }
+
+        public ContractBuilder sderInf(SderInf sderInf) {
             contract.setSderInf(sderInf);
+            return this;
+        }
+
+        public ContractBuilder oriTrxInf(OriTrxInf oriTrxInf) {
+            contract.setOriTrxInf(oriTrxInf);
+            return this;
+        }
+
+        public ContractBuilder pyerInf(PyerInf pyerInf) {
+            contract.setPyerInf(pyerInf);
+            return this;
+        }
+
+        public ContractBuilder pyeeInf(PyeeInf pyeeInf) {
+            contract.setPyeeInf(pyeeInf);
+            return this;
+        }
+
+        public ContractBuilder channelIssInf(ChannelIssInf channelIssInf) {
+            contract.setChannelIssInf(channelIssInf);
+            return this;
+        }
+
+        public ContractBuilder corpCard(CorpCard corpCard) {
+            contract.setCorpCard(corpCard);
+            return this;
+        }
+
+        public ContractBuilder productInfo(ProductInfo productInfo) {
+            contract.setProductInfo(productInfo);
+            return this;
+        }
+
+        public ContractBuilder ordrInf(OrdrInf ordrInf) {
+            contract.setOrdrInf(ordrInf);
+            return this;
+        }
+
+        public ContractBuilder mrchntInf(MrchntInf mrchntInf) {
+            contract.setMrchntInf(mrchntInf);
+            return this;
+        }
+
+        public ContractBuilder subMrchntInf(SubMrchntInf subMrchntInf) {
+            contract.setSubMrchntInf(subMrchntInf);
+            return this;
+        }
+
+        public ContractBuilder rskInf(RskInf rskInf) {
+            contract.setRskInf(rskInf);
             return this;
         }
 

@@ -42,10 +42,19 @@ public class RcverInf {
     @XmlElement(name = "AuthMsg")
     private String AuthMsg;
 
+    //持卡人账户等级
+    @XmlElement(name = "AcctLvl")
+    private String AcctLvl;
+
     //动态短信关联码 与原触发短信交易的动态短信关联码保持一致
     @XmlElement(name = "Smskey")
     private String Smskey;
 
+    @XmlElement(name = "IssrChnnlUrl")
+    private String IssrChnnlUrl;
+
+    @XmlElement(name = "IssrChnnlId")
+    private String IssrChnnlId;
     public RcverInf(String rcverAcctId, String rcverNm) {
         RcverAcctId = rcverAcctId;
         RcverNm = rcverNm;
@@ -111,6 +120,11 @@ public class RcverInf {
 
         public RcverInfBuilder Smskey(String Smskey) {
             rcverInf.setSmskey(Smskey);
+            return this;
+        }
+
+        public RcverInfBuilder AcctLvl(String AcctLvl) {
+            rcverInf.setAcctLvl(AcctLvl);
             return this;
         }
 

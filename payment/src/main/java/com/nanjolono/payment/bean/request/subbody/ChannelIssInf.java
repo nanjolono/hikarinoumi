@@ -16,4 +16,31 @@ public class ChannelIssInf {
 
     @XmlElement(name = "SgnNo")
     private String SgnNo;
+
+
+    public static final class ChannelIssInfBuilder {
+        private ChannelIssInf channelIssInf;
+
+        private ChannelIssInfBuilder() {
+            channelIssInf = new ChannelIssInf();
+        }
+
+        public static ChannelIssInfBuilder aChannelIssInf() {
+            return new ChannelIssInfBuilder();
+        }
+
+        public ChannelIssInfBuilder ChannelIssrId(String ChannelIssrId) {
+            channelIssInf.setChannelIssrId(ChannelIssrId);
+            return this;
+        }
+
+        public ChannelIssInfBuilder SgnNo(String SgnNo) {
+            channelIssInf.setSgnNo(SgnNo);
+            return this;
+        }
+
+        public ChannelIssInf build() {
+            return channelIssInf;
+        }
+    }
 }

@@ -50,4 +50,70 @@ public class OriTrxInf {
     @XmlElement(name = "OriBizTp")
     private String OriBizTp;
 
+
+    public static final class OriTrxInfBuilder {
+        private OriTrxInf oriTrxInf;
+
+        private OriTrxInfBuilder() {
+            oriTrxInf = new OriTrxInf();
+        }
+
+        public static OriTrxInfBuilder anOriTrxInf() {
+            return new OriTrxInfBuilder();
+        }
+
+        public OriTrxInfBuilder OriTrxId(String OriTrxId) {
+            oriTrxInf.setOriTrxId(OriTrxId);
+            return this;
+        }
+
+        public OriTrxInfBuilder OriTrxAmt(String OriTrxAmt) {
+            oriTrxInf.setOriTrxAmt(OriTrxAmt);
+            return this;
+        }
+
+        public OriTrxInfBuilder OriOrdrId(String OriOrdrId) {
+            oriTrxInf.setOriOrdrId(OriOrdrId);
+            return this;
+        }
+
+        public OriTrxInfBuilder OriTrxDtTm(String OriTrxDtTm) {
+            oriTrxInf.setOriTrxDtTm(OriTrxDtTm);
+            return this;
+        }
+
+        public OriTrxInfBuilder OriTrxTp(String OriTrxTp) {
+            oriTrxInf.setOriTrxTp(OriTrxTp);
+            return this;
+        }
+
+        public OriTrxInfBuilder OriBizFunc(String OriBizFunc) {
+            oriTrxInf.setOriBizFunc(OriBizFunc);
+            return this;
+        }
+
+        public OriTrxInfBuilder OriBizAssInf(String OriBizAssInf) {
+            oriTrxInf.setOriBizAssInf(OriBizAssInf);
+            return this;
+        }
+
+        public OriTrxInfBuilder ProductTp(String ProductTp) {
+            oriTrxInf.setProductTp(ProductTp);
+            return this;
+        }
+
+        public OriTrxInfBuilder ProductAssInformation(String ProductAssInformation) {
+            oriTrxInf.setProductAssInformation(ProductAssInformation);
+            return this;
+        }
+
+        public OriTrxInfBuilder OriBizTp(String OriBizTp) {
+            oriTrxInf.setOriBizTp(OriBizTp);
+            return this;
+        }
+
+        public OriTrxInf build() {
+            return oriTrxInf;
+        }
+    }
 }

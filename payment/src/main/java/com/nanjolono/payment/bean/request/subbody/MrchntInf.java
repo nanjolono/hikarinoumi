@@ -1,10 +1,7 @@
 package com.nanjolono.payment.bean.request.subbody;
 
-import com.nanjolono.payment.bean.request.MsgBody;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.nanjolono.payment.bean.MsgBody;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -30,4 +27,40 @@ public class MrchntInf extends MsgBody {
     @XmlElement(name="MrchntTpId")
     private String MrchntTpId;
 
+
+    public static final class MrchntInfBuilder {
+        private MrchntInf mrchntInf;
+
+        private MrchntInfBuilder() {
+            mrchntInf = new MrchntInf();
+        }
+
+        public static MrchntInfBuilder aMrchntInf() {
+            return new MrchntInfBuilder();
+        }
+
+        public MrchntInfBuilder MrchntNo(String MrchntNo) {
+            mrchntInf.setMrchntNo(MrchntNo);
+            return this;
+        }
+
+        public MrchntInfBuilder MrchntPltfrmNm(String MrchntPltfrmNm) {
+            mrchntInf.setMrchntPltfrmNm(MrchntPltfrmNm);
+            return this;
+        }
+
+        public MrchntInfBuilder SubMrchntNo(String SubMrchntNo) {
+            mrchntInf.setSubMrchntNo(SubMrchntNo);
+            return this;
+        }
+
+        public MrchntInfBuilder MrchntTpId(String MrchntTpId) {
+            mrchntInf.setMrchntTpId(MrchntTpId);
+            return this;
+        }
+
+        public MrchntInf build() {
+            return mrchntInf;
+        }
+    }
 }

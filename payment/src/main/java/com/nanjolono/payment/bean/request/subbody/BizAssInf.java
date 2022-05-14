@@ -35,4 +35,51 @@ public class BizAssInf {
     //原交易流水号 MaxMin16Text
     @XmlElement(name = "OriTrxId")
     private String OriTrxId;
+
+
+    public static final class BizAssInfBuilder {
+        private BizAssInf bizAssInf;
+
+        private BizAssInfBuilder() {
+            bizAssInf = new BizAssInf();
+        }
+
+        public static BizAssInfBuilder aBizAssInf() {
+            return new BizAssInfBuilder();
+        }
+
+        public BizAssInfBuilder IPNum(String IPNum) {
+            bizAssInf.setIPNum(IPNum);
+            return this;
+        }
+
+        public BizAssInfBuilder IPMode(String IPMode) {
+            bizAssInf.setIPMode(IPMode);
+            return this;
+        }
+
+        public BizAssInfBuilder IPMrchntExpRate(String IPMrchntExpRate) {
+            bizAssInf.setIPMrchntExpRate(IPMrchntExpRate);
+            return this;
+        }
+
+        public BizAssInfBuilder BizAssInfRsv(String BizAssInfRsv) {
+            bizAssInf.setBizAssInfRsv(BizAssInfRsv);
+            return this;
+        }
+
+        public BizAssInfBuilder PreAuthId(String PreAuthId) {
+            bizAssInf.setPreAuthId(PreAuthId);
+            return this;
+        }
+
+        public BizAssInfBuilder OriTrxId(String OriTrxId) {
+            bizAssInf.setOriTrxId(OriTrxId);
+            return this;
+        }
+
+        public BizAssInf build() {
+            return bizAssInf;
+        }
+    }
 }

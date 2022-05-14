@@ -21,4 +21,35 @@ public class OrdrInf {
     @XmlElement(name = "OrdrDescRsv")
     private String OrdrDescRsv;
 
+
+    public static final class OrdrInfBuilder {
+        private OrdrInf ordrInf;
+
+        private OrdrInfBuilder() {
+            ordrInf = new OrdrInf();
+        }
+
+        public static OrdrInfBuilder anOrdrInf() {
+            return new OrdrInfBuilder();
+        }
+
+        public OrdrInfBuilder OrdrId(String OrdrId) {
+            ordrInf.setOrdrId(OrdrId);
+            return this;
+        }
+
+        public OrdrInfBuilder OrdrDesc(String OrdrDesc) {
+            ordrInf.setOrdrDesc(OrdrDesc);
+            return this;
+        }
+
+        public OrdrInfBuilder OrdrDescRsv(String OrdrDescRsv) {
+            ordrInf.setOrdrDescRsv(OrdrDescRsv);
+            return this;
+        }
+
+        public OrdrInf build() {
+            return ordrInf;
+        }
+    }
 }

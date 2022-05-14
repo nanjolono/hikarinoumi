@@ -36,4 +36,72 @@ public class PyerInf {
 
     @XmlElement(name = "PyeeIssrId")
     private String PyeeIssrId;
+
+    @XmlElement(name = "AuthMsg")
+    private String AuthMsg;
+
+    @XmlElement(name = "Smskey")
+    private String Smskey ;
+
+
+    public static final class PyerInfBuilder {
+        private PyerInf pyerInf;
+
+        private PyerInfBuilder() {
+            pyerInf = new PyerInf();
+        }
+
+        public static PyerInfBuilder aPyerInf() {
+            return new PyerInfBuilder();
+        }
+
+        public PyerInfBuilder PyerAcctId(String PyerAcctId) {
+            pyerInf.setPyerAcctId(PyerAcctId);
+            return this;
+        }
+
+        public PyerInfBuilder PyerNm(String PyerNm) {
+            pyerInf.setPyerNm(PyerNm);
+            return this;
+        }
+
+        public PyerInfBuilder IDTp(String IDTp) {
+            pyerInf.setIDTp(IDTp);
+            return this;
+        }
+
+        public PyerInfBuilder IDNo(String IDNo) {
+            pyerInf.setIDNo(IDNo);
+            return this;
+        }
+
+        public PyerInfBuilder MobNo(String MobNo) {
+            pyerInf.setMobNo(MobNo);
+            return this;
+        }
+
+        public PyerInfBuilder PyerAcctIssrId(String PyerAcctIssrId) {
+            pyerInf.setPyerAcctIssrId(PyerAcctIssrId);
+            return this;
+        }
+
+        public PyerInfBuilder PyeeIssrId(String PyeeIssrId) {
+            pyerInf.setPyeeIssrId(PyeeIssrId);
+            return this;
+        }
+
+        public PyerInfBuilder AuthMsg(String AuthMsg) {
+            pyerInf.setAuthMsg(AuthMsg);
+            return this;
+        }
+
+        public PyerInfBuilder Smskey(String Smskey) {
+            pyerInf.setSmskey(Smskey);
+            return this;
+        }
+
+        public PyerInf build() {
+            return pyerInf;
+        }
+    }
 }
