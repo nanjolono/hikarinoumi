@@ -87,6 +87,16 @@ public class Contract extends MsgBody {
     @XmlElement(name = "RskInf")
     private RskInf rskInf;
 
+    //风险监控信息
+    @XmlElement(name = "EncrpAssInf")
+    private EncrpAssInf encrpAssInf;
+
+    @XmlElement(name = "SysRtnInf")
+    private SysRtnInf sysRtnInf;
+
+    @XmlElement(name = "BizInf")
+    private BizInf bizInf;
+
     public Contract(String bizTp, String bizFunc) {
         this.bizTp = bizTp;
         BizFunc = bizFunc;
@@ -190,6 +200,18 @@ public class Contract extends MsgBody {
 
         public ContractBuilder rskInf(RskInf rskInf) {
             contract.setRskInf(rskInf);
+            return this;
+        }
+
+        public ContractBuilder encrpAssInf(EncrpAssInf encrpAssInf) {
+            contract.setEncrpAssInf(encrpAssInf);
+            return this;
+        }
+
+
+
+        public ContractBuilder sysRtnInf(SysRtnInf sysRtnInf) {
+            contract.setSysRtnInf(sysRtnInf);
             return this;
         }
 

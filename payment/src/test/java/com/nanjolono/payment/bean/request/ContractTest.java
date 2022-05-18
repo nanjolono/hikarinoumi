@@ -9,6 +9,7 @@ import com.nanjolono.payment.constant.QuickPayConstant;
 import com.nanjolono.payment.security.certification.RsaCertUtils;
 import com.nanjolono.payment.security.cupsec.CupSec;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -17,11 +18,14 @@ import org.springframework.web.client.RestTemplate;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.security.PrivateKey;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 class ContractTest {
 
@@ -31,8 +35,8 @@ class ContractTest {
 
     @Test
     @DisplayName("1 - 无卡快捷支付 - 认证支付触发短信 - 账户验证")
+    @Order(0)
     void xmlStr() throws JAXBException, IllegalAccessException {
-        new QuickPayDTO();
         //JAXB 准备
         Marshaller marshaller = getMarshaller();
         //获取MsgBody
@@ -75,7 +79,7 @@ class ContractTest {
                                 .IDTp("01")
                                 .MobNo("17627890921")
                                 .AuthMsg("123456")
-                                .Smskey("20220513101016000062").build())
+                                .Smskey("20220517120412000067").build())
                         .trxInf(TrxInf.TrxInfBuilder.verifyInfoTrxInf("0409PLMN9012ER45", getNow()).build())
                         .sderInf(SderInf.SderInfBuilder.verifyInfoSderInf("1231D312312", "1231232DQW1").build())
                         .oriTrxInf(OriTrxInf.OriTrxInfBuilder.anOriTrxInf().OriTrxId("0409PLMN9012ER45").build())
@@ -90,7 +94,7 @@ class ContractTest {
     void xmlStr2() throws JAXBException, IllegalAccessException {
         QuickPayment build = QuickPayment.QuickPaymentBuilder.aQuickPayment(
                 MsgHeader.MsgHeaderBuilder.aMsgHeader().msgVer("1000").drctn("11").issrId("05709200")
-                        .signSN("4038186043").sndDt("2022-04-22T12:12:12").signEncAlgo("0").mDAlgo("0")
+                        .signSN("4038186043").sndDt(getNow()).signEncAlgo("0").mDAlgo("0")
                         .encSN("4022714199").encKey("11111111").encAlgo("0").trxtyp(QuickPayConstant.TrxTpCd.Debit.TRANS_PROTOCOL)
                         .build(),
                 Contract.ContractBuilder.verifyInfo("300001", QuickPayConstant.BizFuncCd.fullConsumption)
@@ -110,7 +114,7 @@ class ContractTest {
                                 .build())
                         .channelIssInf(ChannelIssInf.ChannelIssInfBuilder.aChannelIssInf()
                                 .ChannelIssrId("01ADS523123")
-                                .SgnNo("UPW0ISS0011231232D01005709200W0ISS001202205130000000063")
+                                .SgnNo("UPW0ISS0011231232D01005709200W0ISS001202205170000000068")
                                 .build())
                         .mrchntInf(MrchntInf.MrchntInfBuilder.aMrchntInf()
                                 .MrchntTpId("0209")
@@ -155,59 +159,16 @@ class ContractTest {
                                         .build())
                                 .oriTrxInf(OriTrxInf.OriTrxInfBuilder.anOriTrxInf()
                                         .OriTrxId("0405898KPLQ09182")
-                                        .OriTrxAmt("CNY100.00")
+                                        .OriTrxAmt("CNY400.00")
                                         .OriTrxTp("1001")
                                         .OriOrdrId("123123123")
                                         .OriBizAssInf("111011")
                                         .OriBizFunc("111011")
-                                        .OriTrxDtTm("2022-05-13T11:20:00")
+                                        .OriTrxDtTm("2022-05-17T11:46:52")
                                         .build())
                         .build()
         ).build();
         post(marshaller, response,"1101");
-    }
-
-
-    @Test
-    @DisplayName("5 - 无卡快捷支付 - 全额消费 - 超时 - 原交易")
-    void xmlStr3() throws JAXBException, IllegalAccessException {
-        //JAXB 准备
-        Marshaller marshaller = getMarshaller();
-        //实例化报文主体
-        QuickPayment response = new QuickPayment();
-        //获取MsgHeader
-        MsgHeader msgHeader = getMsgHeader();
-        msgHeader.setTrxtyp("1001");
-        //获取MsgBody
-        Contract contract = getContract();
-        contract.setBizFunc("111011");
-        TrxInf trxInf = new TrxInf();
-        trxInf.setTrxId("0405898KPLQ09182");
-        trxInf.setTrxDtTm("2020-09-09T18:14:12");
-        trxInf.setTrxAmt("CNY0.33");
-        trxInf.setTrxTrmTp("08");
-        contract.setTrxInf(trxInf);
-        PyerInf pyerInf = new PyerInf();
-        pyerInf.setPyerAcctId("22020930101019292");
-        contract.setPyerInf(pyerInf);
-        PyeeInf pyeeInf = new PyeeInf();
-        pyeeInf.setPyeeIssrId("123123");
-        pyeeInf.setPyeeAcctIssrId("asdasds");
-        contract.setPyeeInf(pyeeInf);
-        ChannelIssInf channelIssInf = new ChannelIssInf();
-        channelIssInf.setChannelIssrId("01ADS523123");
-        channelIssInf.setSgnNo("UPW0ISS001PDLQ90OD01005709200W0ISS001202205010000000002");
-        contract.setChannelIssInf(channelIssInf);
-        MrchntInf mrchntInf = new MrchntInf();
-        mrchntInf.setMrchntTpId("0209");
-        mrchntInf.setMrchntNo("333T12F222D3123");
-        mrchntInf.setMrchntPltfrmNm("123123123");
-        contract.setMrchntInf(mrchntInf);
-        OrdrInf ordrInf = new OrdrInf();
-        ordrInf.setOrdrId("123123123");
-        contract.setOrdrInf(ordrInf);
-        //init(response, msgHeader, contract);
-        post(marshaller, response,"1001");
     }
 
     @Test
@@ -225,15 +186,17 @@ class ContractTest {
         contract.setBizFunc("111011");
         contract.setBizTp("300002");
         TrxInf trxInf = new TrxInf();
-        trxInf.setTrxId("0405899KPLQ09182");
+        trxInf.setTrxId("0405899KPLQ09183");
         trxInf.setTrxDtTm("2020-09-09T18:14:12");
         contract.setTrxInf(trxInf);
         OriTrxInf oriTrxInf = new OriTrxInf();
         oriTrxInf.setOriTrxTp("1001");
         oriTrxInf.setOriBizTp("300001");
-        oriTrxInf.setOriTrxDtTm("2020-09-09T18:14:12");
+        oriTrxInf.setOriTrxDtTm("2022-05-17T11:48:29");
         oriTrxInf.setOriTrxId("0405898KPLQ09182");
         contract.setOriTrxInf(oriTrxInf);
+        response.setMsgHeader(msgHeader);
+        response.setMsgBody(contract);
         //init(response, msgHeader, contract);
         post(marshaller, response,"3101");
     }
@@ -262,7 +225,7 @@ class ContractTest {
                                 .build())
                         .channelIssInf(ChannelIssInf.ChannelIssInfBuilder.aChannelIssInf()
                                 .ChannelIssrId("01ADS523123")
-                                .SgnNo("UPW0ISS0011231232D01005709200W0ISS001202205120000000051")
+                                .SgnNo("UPW0ISS0011231232D01005709200W0ISS001202205170000000068")
                                 .build())
                         .mrchntInf(MrchntInf.MrchntInfBuilder.aMrchntInf()
                                 .MrchntTpId("0209")
@@ -305,7 +268,7 @@ class ContractTest {
         contract.setPyeeInf(pyeeInf);
         ChannelIssInf channelIssInf = new ChannelIssInf();
         channelIssInf.setChannelIssrId("01ADS523123");
-        channelIssInf.setSgnNo("UPW0ISS001PDLQ90OD01005709200W0ISS001202205010000000002");
+        channelIssInf.setSgnNo("UPW0ISS0011231232D01005709200W0ISS001202205170000000068");
         contract.setChannelIssInf(channelIssInf);
         MrchntInf mrchntInf = new MrchntInf();
         mrchntInf.setMrchntTpId("0209");
@@ -769,12 +732,25 @@ class ContractTest {
         httpHeaders.set("MsgTp",msgTp);
         httpHeaders.set("OriIssrId","05709200");
         HttpEntity<String> httpEntity = new HttpEntity<>(df, httpHeaders);
-        ResponseEntity<String> result = restTemplate.postForEntity("http://172.16.151.139/", httpEntity, String.class);
+        ResponseEntity<String> result = restTemplate.postForEntity("http://172.16.151.148/", httpEntity, String.class);
         if (!result.getStatusCode().is2xxSuccessful()) {
             throw new IllegalAccessException("通信异常");
         }
-        System.out.println(result.getBody());
+        String resultStr =result.getBody();
+        String signRegx = "(<root>)([\\s\\S]*?)(</root>)";
+        String contentReg = "(\\{S:)([\\s\\S]*?)(})";
+        String trim = Pattern.compile(contentReg).matcher(resultStr).replaceAll("").trim();
+        try {
+            JAXBContext context = JAXBContext.newInstance(QuickPayment.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            QuickPayment unmarshal = (QuickPayment)unmarshaller.unmarshal(new StringReader(trim));
+            System.out.println(unmarshal.getMsgBody().getSysRtnInf().getSysRtnCd());
+        } catch (JAXBException e) {
+            throw new RuntimeException(e);
+        }
     }
+
+
 
     private String getSign(String src) {
         //加签
@@ -822,7 +798,7 @@ class ContractTest {
 
 
     @Test
-    void test() {
+    void test() throws JAXBException {
         String bi="<root>\n" +
                 "    <MsgHeader>\n" +
                 "        <MsgVer>1000</MsgVer>\n" +
@@ -858,7 +834,17 @@ class ContractTest {
                 "        </SderInf>\n" +
                 "    </MsgBody>\n" +
                 "</root>{S:H4PH1ElgtR4/bfvfaoQPYsOWh/uyL4vOCFo1HRlQnt1EZSXx/VCUjixUO/EsVx8ZHA8TBwXBfa+jBHAZjb0ZZcOagwjwfR4C1SItY/fDHUfgWZXwtqVG2KpRdMDwEMIt+PSz8BwZAwKWAskVhte4iCPv9+PykOjHueiSgIS3DhqL8+w7JclbQkofJpti3py77XI2syMjnT/tMWkr+rRmhm3zeWbsnmaaFYSbEs+BUI+SlACOrn/vQuroFw8dj+N++DaHfbIW0yIsMrgNCT2A2ld1H8kCaKrBXn6UcMgDMXLOAI7UmwTOQ01DiYE+UL1NciAkyJLvs4VKk557MhxCXA==}";
-        String regex = "<root>*</root>";
-        System.out.println(bi.replaceAll(regex,""));
+
+        String signRegx = "(<root>)([\\s\\S]*?)(</root>)";
+        String contentReg = "(\\{S:)([\\s\\S]*?)(})";
+        System.out.println(Pattern.compile(signRegx).matcher(bi).replaceAll("").trim());
+        System.out.println("-------");
+        System.out.println(Pattern.compile(contentReg).matcher(bi).replaceAll("").trim());
+        String trim = Pattern.compile(contentReg).matcher(bi).replaceAll("").trim();
+
+        JAXBContext context = JAXBContext.newInstance(QuickPayment.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        QuickPayment unmarshal = (QuickPayment)unmarshaller.unmarshal(new StringReader(trim));
+        System.out.println(unmarshal.toString());
     }
 }

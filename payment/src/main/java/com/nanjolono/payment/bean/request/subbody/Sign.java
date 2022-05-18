@@ -24,4 +24,9 @@ public class Sign {
         }
         return start + signContext + end;
     }
+
+    public String getSignContextFromOrigin(String sign){
+        return sign.replaceFirst(start,"").replace(end,"");
+    }
+
 }

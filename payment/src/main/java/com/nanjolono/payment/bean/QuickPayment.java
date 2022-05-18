@@ -23,9 +23,7 @@ public class QuickPayment implements Serializable {
     @XmlElement(name="MsgHeader")
     private MsgHeader msgHeader;
 
-    @XmlElements({
-            @XmlElement(name = "MsgBody",type = Contract.class)
-    })
+    @XmlElement(name="MsgBody")
     private MsgBody msgBody;
 
     public QuickPayment() {
