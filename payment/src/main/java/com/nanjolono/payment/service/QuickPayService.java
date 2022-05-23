@@ -1,8 +1,6 @@
 package com.nanjolono.payment.service;
 
-import com.nanjolono.payment.bean.QuickPayment;
 import com.nanjolono.payment.bean.dto.*;
-import com.nanjolono.payment.utils.R;
 
 import javax.xml.bind.JAXBException;
 
@@ -46,29 +44,32 @@ public interface QuickPayService {
 
     /**
      * 协议支付 - 订单查询
-     * @param queryOrder
+     * @param queryOrderDTO
      * @return
      * @throws JAXBException
      * @throws IllegalAccessException
      */
-    Object queryOrder(QueryOrder queryOrder) throws JAXBException, IllegalAccessException;
+    Object queryOrder(QueryOrderDTO queryOrderDTO) throws JAXBException, IllegalAccessException;
 
     /**
      * 协议支付 - 预授权撤销
-     * @param queryOrder
+     * @param queryOrderDTO
      * @return
      * @throws JAXBException
      * @throws IllegalAccessException
      */
-    Object preAhtuCancel(QueryOrder queryOrder) throws JAXBException, IllegalAccessException;
+    Object preAhtuCancel(QueryOrderDTO queryOrderDTO) throws JAXBException, IllegalAccessException;
 
     /**
      * 协议支付 - 预授权完成
-     * @param queryOrder
+     * @param queryOrderDTO
      * @return
      * @throws JAXBException
      * @throws IllegalAccessException
      */
-    Object preAhtuDone(QueryOrder queryOrder) throws JAXBException, IllegalAccessException;
+    Object preAhtuDone(QueryOrderDTO queryOrderDTO) throws JAXBException, IllegalAccessException;
 
+    Object authSMS(AuthSMSDTO authSMSDTO) throws JAXBException, IllegalAccessException;
+
+    Object authTrans(AuthTransDTO authTransDTO) throws JAXBException, IllegalAccessException;
 }

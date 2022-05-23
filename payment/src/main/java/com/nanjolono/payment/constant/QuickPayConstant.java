@@ -149,12 +149,14 @@ public interface QuickPayConstant {
 
     interface BizTpCd {
         //@TODO
-        interface merchantConsumption {
-            //虚拟商品购买
-            String virtualGoodsPurchase = "100001";
+        interface Service {
+            //账户类
+            String accountService = "300001";
+            //系统类
+            String systemService = "300002";
+            //管理类
+            String manageService = "300003";
 
-            //预付费类账户充值
-            String prepaidAccountRecharge = "100002";
         }
     }
 

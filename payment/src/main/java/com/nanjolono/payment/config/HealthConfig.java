@@ -6,8 +6,10 @@ import com.netflix.appinfo.InstanceInfo;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.stereotype.Component;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Component
+@EnableSwagger2
 public class HealthConfig implements HealthIndicator {
 
 
