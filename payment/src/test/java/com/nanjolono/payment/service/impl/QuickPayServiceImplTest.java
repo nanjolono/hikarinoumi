@@ -27,6 +27,7 @@ class QuickPayServiceImplTest {
 
     @Autowired
     RedisTemplate<String,Object> redisTemplate;
+    private RefundDTO refundDTO;
 
 
     @Test
@@ -66,7 +67,7 @@ class QuickPayServiceImplTest {
     @Test
     @DisplayName("退款")
     void refund() throws JAXBException, IllegalAccessException {
-        RefundDTO refundDTO = new RefundDTO();
+        refundDTO = new RefundDTO();
         refundDTO.setAmount("100.00");
         refundDTO.setTrxTrmTp("08");
         refundDTO.setOriTrxId("0405898KPLQ09182");
